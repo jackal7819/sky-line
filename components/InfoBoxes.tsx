@@ -2,8 +2,8 @@ import InfoBox from './InfoBox';
 
 export default function InfoBoxes() {
 	return (
-		<section className='m-auto container-xl lg:container'>
-			<div className='grid grid-cols-1 gap-4 p-4 rounded-lg md:grid-cols-2'>
+		<section className='px-2 mx-auto max-w-screen-2xl sm:px-6 lg:px-8'>
+			<div className='grid grid-cols-1 gap-4 py-4 rounded-lg md:grid-cols-2'>
 				<InfoBox
 					title='For Renters'
 					text='Find your dream rental property. Bookmark properties and contact owners.'

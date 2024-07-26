@@ -5,6 +5,7 @@ import { FaBars, FaRegBell, FaRegUser } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import Logo from './Logo';
 
 export default function Navbar() {
 	const pathname = usePathname();
@@ -26,17 +27,7 @@ export default function Navbar() {
 					</div>
 					<div className='flex items-center justify-center flex-1 md:items-stretch md:justify-start'>
 						{/* LOGO */}
-						<Link
-							href='/'
-							className='flex items-center justify-center p-1 text-xl font-semibold duration-300 bg-black rounded-md group hover:bg-white'
-						>
-							<span className='ml-1 mr-2 text-white duration-300 group-hover:text-amber-500'>
-								Sky
-							</span>
-							<span className='flex items-center justify-center h-8 text-black duration-300 bg-white rounded w-14 group-hover:text-white group-hover:bg-amber-500'>
-								Line
-							</span>
-						</Link>
+						<Logo />
 						{/* DESKTOP MENU HIDDEN BELOW MD SCREENS */}
 						<div className='hidden 2xl:text-xl md:ml-6 md:block 2xl:ml-20'>
 							<div className='flex space-x-2 2xl:space-x-6'>
