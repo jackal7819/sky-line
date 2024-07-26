@@ -13,7 +13,7 @@ export default function Navbar() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	return (
-		<nav className='bg-amber-500'>
+		<nav className='border-b-2 border-b-white bg-amber-500'>
 			<div className='px-2 mx-auto max-w-screen-2xl sm:px-6 lg:px-8'>
 				<div className='flex items-center justify-between h-20'>
 					<div className='flex items-center md:hidden'>
