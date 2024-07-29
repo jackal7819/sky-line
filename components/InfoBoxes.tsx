@@ -7,24 +7,20 @@ export default function InfoBoxes() {
 				<InfoBox
 					title='For Renters'
 					text='Find your dream rental property. Bookmark properties and contact owners.'
-					backgroundColor='gray-100'
+					backgroundColor='#F3F4F6'
 					buttonInfo={{
 						text: 'Browse Properties',
 						link: '/properties',
-						backgroundColor: 'black',
-						backgroundHoverColor: 'amber-500',
 					}}
 				/>
 				<InfoBox
 					title='For Property Owners'
 					text='List your properties and reach potential tenants. Rent
 						as an airbnb or long term.'
-					backgroundColor='blue-100'
+					backgroundColor='#DBEAFE'
 					buttonInfo={{
 						text: 'Add Property',
 						link: '/properties/add',
-						backgroundColor: 'amber-500',
-						backgroundHoverColor: 'black',
 					}}
 				/>
 			</div>
