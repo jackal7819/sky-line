@@ -113,8 +113,8 @@ export default function PropertyCard({
 
 				<div className='mb-5 border border-gray-100'></div>
 
-				<div className='flex flex-col justify-between mb-4 lg:flex-row'>
-					<div className='flex gap-2 mb-4 text-orange-700 align-middle lg:mb-0'>
+				<div className='flex flex-col items-center justify-between mb-4 lg:flex-row'>
+					<div className='flex items-center gap-2 mb-4 text-orange-700 lg:mb-0'>
 						<FaLocationDot />
 						<span>
 							{location.city} {location.state}
