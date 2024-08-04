@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { FaExclamationTriangle } from 'react-icons/fa';
+import { FaExclamationCircle } from 'react-icons/fa';
 
 export default function NonFoundPage() {
 	return (
 		<section className='flex items-center justify-center w-full bg-blue-50'>
 			<div className='max-w-2xl py-10 m-auto'>
 				<div className='p-6 pb-10 m-4 mb-4 bg-white border rounded-md shadow-md md:p-20 md:m-0'>
-					<FaExclamationTriangle className='m-auto text-8xl text-amber-500' />
+					<FaExclamationCircle className='m-auto text-8xl text-amber-500' />
 					<div className='text-center'>
 						<h1 className='mt-4 mb-2 text-3xl font-bold'>
 							Page Not Found
