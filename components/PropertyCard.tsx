@@ -93,7 +93,7 @@ export default function PropertyCard({
 					</p>
 				</div>
 
-				<div className='flex justify-center gap-4 mb-4 text-sm text-green-900'>
+				<div className='flex justify-center gap-4 mb-4 text-sm text-amber-500'>
 					{rates.nightly && (
 						<p>
 							<FaMoneyBill className='inline mr-2' /> Nightly
@@ -114,7 +114,7 @@ export default function PropertyCard({
 				<div className='mb-5 border border-gray-100'></div>
 
 				<div className='flex flex-col items-center justify-between mb-4 lg:flex-row'>
-					<div className='flex items-center gap-2 mb-4 text-orange-700 lg:mb-0'>
+					<div className='flex items-center gap-2 mb-4 text-orange-500 lg:mb-0'>
 						<FaLocationDot />
 						<span>
 							{location.city} {location.state}

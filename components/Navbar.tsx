@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { FaBars, FaRegBell, FaRegUser } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
+import { FaBars, FaGoogle, FaRegBell, FaRegUser } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+
 import Logo from './Logo';
 
 export default function Navbar() {
@@ -66,7 +66,7 @@ export default function Navbar() {
 					{!isLoggedIn && (
 						<div className='items-center hidden md:flex md:ml-6 2xl:mr-6'>
 							<button className='flex items-center gap-2 px-3 py-2 text-white duration-500 bg-black rounded-md hover:bg-white hover:text-amber-500'>
-								<FcGoogle size={24} />
+								<FaGoogle size={24} />
 								<span>Login or Register</span>
 							</button>
 						</div>
