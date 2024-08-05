@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongoose'
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaBath, FaBed, FaMoneyBill, FaRulerCombined } from 'react-icons/fa';
@@ -17,7 +18,7 @@ type PeriodConfig = {
 };
 
 type PropertyCardProps = {
-	_id: string;
+	_id: ObjectId;
 	name: string;
 	type: string;
 	rates: Rates;

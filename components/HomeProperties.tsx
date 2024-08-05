@@ -1,12 +1,15 @@
 import Link from 'next/link';
-import properties from '@/properties.json';
+import Property from '@/models/Property';
+import connectDB from '@/config/database';
 
 import PropertyCard from './PropertyCard';
 
-export default function HomeProperties() {
-	const getRandomProperties = () =>
-		properties.sort(() => Math.random() - Math.random()).slice(0, 3);
-	const recentProperties = getRandomProperties();
+export default async function HomeProperties() {
+	await connectDB();
+	const recentProperties = await Property.find({})
+		.sort({ createdAt: -1 })
+		.limit(3)
+		.lean();
 
 	return (
 		<>
@@ -24,7 +27,7 @@ export default function HomeProperties() {
 						<div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
 							{recentProperties.map((property) => (
 								<PropertyCard
-									key={property._id}
+									key={String(property._id)}
 									{...property}
 								/>
 							))}

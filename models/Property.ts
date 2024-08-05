@@ -1,6 +1,7 @@
 import { Document, Model, Schema, model, models } from 'mongoose';
 
 type IProperty = Document & {
+	_id: Schema.Types.ObjectId;
 	owner: Schema.Types.ObjectId;
 	name: string;
 	type: string;
@@ -31,6 +32,9 @@ type IProperty = Document & {
 
 const PropertySchema = new Schema<IProperty>(
 	{
+		_id: {
+			type: Schema.Types.ObjectId,
+		},
 		owner: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',
