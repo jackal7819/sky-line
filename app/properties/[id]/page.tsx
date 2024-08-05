@@ -3,6 +3,7 @@ import PropertyHeader from '@/components/PropertyHeader';
 import connectDB from '@/config/database';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import Link from 'next/link';
+import PropertyDetails from '@/components/PropertyDetails'
 
 type Params = {
 	id: string;
@@ -30,13 +31,14 @@ export default async function PropertyPage({ params }: { params: Params }) {
 					Back to Properties
 				</Link>
 			</div>
-			<section className='bg-blue-50'>
+			<div className='bg-blue-50'>
 				<div className='px-2 py-10 mx-auto sm:px-6 lg:px-8 max-w-screen-2xl'>
 					<div className='grid w-full grid-cols-1 gap-6 md:grid-cols-70/30'>
-					
+						{/* PROPERTY INFO */}
+						<PropertyDetails property={property} />
 					</div>
 				</div>
-			</section>
+			</div>
 		</section>
 	);
 }
