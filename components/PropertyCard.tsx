@@ -122,7 +122,7 @@ export default function PropertyCard({
 						</span>
 					</div>
 					<Link
-						href={`/property/${_id}`}
+						href={`/properties/${_id}`}
 						className='px-4 py-2 text-sm text-center text-white duration-500 bg-black rounded-lg h-9 hover:bg-amber-500'
 					>
 						Details

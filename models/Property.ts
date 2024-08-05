@@ -1,6 +1,6 @@
 import { Document, Model, Schema, model, models } from 'mongoose';
 
-type IProperty = Document & {
+export type IProperty = Document & {
 	_id: Schema.Types.ObjectId;
 	owner: Schema.Types.ObjectId;
 	name: string;
