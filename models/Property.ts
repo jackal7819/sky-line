@@ -32,9 +32,6 @@ export type IProperty = Document & {
 
 const PropertySchema = new Schema<IProperty>(
 	{
-		_id: {
-			type: Schema.Types.ObjectId,
-		},
 		owner: {
 			type: Schema.Types.ObjectId,
 			ref: 'User',

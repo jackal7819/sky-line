@@ -2,16 +2,28 @@
 
 import Link from 'next/link';
 import { FaBars, FaGoogle, FaRegBell, FaRegUser } from 'react-icons/fa';
+import { getProviders, signIn, useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 
 import Logo from './Logo';
 
 export default function Navbar() {
+	const { data: session } = useSession();
 	const pathname = usePathname();
+
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [providers, setProviders] = useState(null);
+
+	useEffect(() => {
+		const setAuthProviders = async () => {
+			const response = await getProviders();
+			setProviders(response);
+		};
+
+		setAuthProviders();
+	}, []);
 
 	return (
 		<nav className='border-b-2 border-b-white bg-amber-500'>
@@ -47,7 +59,7 @@ export default function Navbar() {
 								>
 									Properties
 								</Link>
-								{isLoggedIn && (
+								{session && (
 									<Link
 										href='/properties/add'
 										className={`px-3 py-2 text-white duration-500 rounded-md hover:bg-white hover:text-amber-500 ${
@@ -63,17 +75,24 @@ export default function Navbar() {
 					</div>
 
 					{/* RIGHT SIDE MENU (LOGGED OUT) */}
-					{!isLoggedIn && (
+					{!session && (
 						<div className='items-center hidden md:flex md:ml-6 2xl:mr-6'>
-							<button className='flex items-center gap-2 px-3 py-2 text-white duration-500 bg-black rounded-md hover:bg-white hover:text-amber-500'>
-								<FaGoogle size={24} />
-								<span>Login or Register</span>
-							</button>
+							{providers &&
+								Object.values(providers).map((provider) => (
+									<button
+										key={provider.id}
+										onClick={() => signIn(provider.id)}
+										className='flex items-center gap-2 px-3 py-2 text-white duration-500 bg-black rounded-md hover:bg-white hover:text-amber-500'
+									>
+										<FaGoogle size={24} />
+										<span>Login or Register</span>
+									</button>
+								))}
 						</div>
 					)}
 
 					{/* RIGHT SIDE MENU (LOGGED IN) */}
-					{isLoggedIn && (
+					{session && (
 						<div className='flex items-center pr-2 md:ml-6 md:pr-0'>
 							<Link href='/messages' className='relative group'>
 								<div className='duration-500 cursor-pointer hover:text-white'>
@@ -161,7 +180,7 @@ export default function Navbar() {
 					>
 						Properties
 					</Link>
-					{isLoggedIn && (
+					{session && (
 						<Link
 							href='/properties/add'
 							className={`block px-3 py-2 text-base font-medium text-white duration-500 rounded-md hover:bg-white hover:text-amber-500 hover:px-6  ${
@@ -172,7 +191,7 @@ export default function Navbar() {
 							Add Property
 						</Link>
 					)}
-					{!isLoggedIn && (
+					{!session && (
 						<button
 							className='block w-full px-3 py-2 text-base font-medium text-left text-white duration-500 rounded-md hover:bg-white hover:text-amber-500 hover:px-6'
 							onClick={() => setIsMobileMenuOpen(false)}

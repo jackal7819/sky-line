@@ -1,6 +1,7 @@
 import { Document, Model, Schema, model, models } from 'mongoose';
 
-type IUser = Document & {
+export type IUser = Document & {
+	_id: Schema.Types.ObjectId;
 	email: string;
 	username: string;
 	image?: string;
