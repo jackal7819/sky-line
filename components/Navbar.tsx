@@ -2,19 +2,31 @@
 
 import Link from 'next/link';
 import { FaBars, FaGoogle, FaRegBell, FaRegUser } from 'react-icons/fa';
-import { getProviders, signIn, useSession } from 'next-auth/react';
+import {
+	ClientSafeProvider,
+	getProviders,
+	LiteralUnion,
+	signIn,
+	signOut,
+	useSession,
+} from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import Logo from './Logo';
+import { BuiltInProviderType } from 'next-auth/providers/index';
 
 export default function Navbar() {
 	const { data: session } = useSession();
 	const pathname = usePathname();
+	const profileImage = session?.user?.image;
 
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-	const [providers, setProviders] = useState(null);
+	const [providers, setProviders] = useState<Record<
+		LiteralUnion<BuiltInProviderType, string>,
+		ClientSafeProvider
+	> | null>(null);
 
 	useEffect(() => {
 		const setAuthProviders = async () => {
@@ -148,6 +160,10 @@ export default function Navbar() {
 											role='menuitem'
 											tabIndex={-1}
 											id='user-menu-item-2'
+											onClick={() => {
+												setIsProfileMenuOpen(false);
+												signOut();
+											}}
 										>
 											Sign Out
 										</button>
