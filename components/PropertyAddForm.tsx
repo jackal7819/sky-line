@@ -1,6 +1,8 @@
+import addProperty from '@/app/actions/addProperty';
+
 export default function PropertyAddForm() {
 	return (
-		<form>
+		<form action={addProperty}>
 			<h2 className='mb-6 text-3xl font-semibold text-center'>
 				Add Property
 			</h2>
