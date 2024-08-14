@@ -369,7 +369,7 @@ export default function PropertyAddForm() {
 				<input
 					type='text'
 					id='seller_name'
-					name='seller_info.name.'
+					name='seller_info.name'
 					className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					placeholder='Name'
 				/>
