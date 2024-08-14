@@ -39,6 +39,7 @@
 'use server';
 
 import Property from '@/models/Property';
+import cloudinary from '@/config/cloudinary';
 import connectDB from '@/config/database';
 import { getSessionUser } from '@/utils/getSessionUser';
 import { redirect } from 'next/navigation';
@@ -87,8 +88,7 @@ export default async function addProperty(formData: FormData) {
 	const amenities = formData.getAll('amenities') as string[];
 	const images = formData
 		.getAll('images')
-		.filter((image) => image instanceof File && image.name !== '')
-		.map((image) => (image instanceof File ? image.name : ''));
+		.filter((image) => image instanceof File && image.name !== '') as File[];
 
 	const propertyData: PropertyData = {
 		owner: userId,
@@ -123,8 +123,29 @@ export default async function addProperty(formData: FormData) {
 			email: formData.get('seller_info.email') as string | null,
 			phone: formData.get('seller_info.phone') as string | null,
 		},
-		images,
+		images: [],
 	};
+
+	const imageUrls = [];
+
+	for (const imageFile of images) {
+		const imageBuffer = await imageFile.arrayBuffer();
+		const imageArray = Array.from(new Uint8Array(imageBuffer));
+		const imageData = Buffer.from(imageArray);
+
+		// Convert to base64
+		const imageBase64 = imageData.toString('base64');
+
+		// Make request to Cloudinary API
+		const result = await cloudinary.uploader.upload(
+			`data:image/png;base64,${imageBase64}`,
+			{ folder: 'skyline' }
+		);
+
+		imageUrls.push(result.secure_url);
+	}
+
+	propertyData.images = imageUrls;
 
 	const newProperty = new Property(propertyData);
 	await newProperty.save();

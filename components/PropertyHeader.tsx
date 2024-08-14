@@ -10,7 +10,7 @@ export default function PropertyHeader({ name, image }: PropertyHeaderProps) {
 		<div className='m-auto'>
 			<div className='grid grid-cols-1'>
 				<Image
-					src={`/properties/${image}`}
+					src={image}
 					alt={name}
 					className='object-cover w-full h-96'
 					width={0}
