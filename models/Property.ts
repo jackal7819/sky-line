@@ -66,7 +66,7 @@ const PropertySchema = new Schema<IProperty>(
 			type: Number,
 			required: true,
 		},
-		amenities: [{ type: [String] }],
+		amenities: [{ type: String }],
 		rates: {
 			nightly: Number,
 			weekly: Number,
