@@ -1,9 +1,10 @@
+import Link from 'next/link';
 import Property from '@/models/Property';
+import PropertyDetails from '@/components/PropertyDetails';
 import PropertyHeader from '@/components/PropertyHeader';
+import PropertyImages from '@/components/PropertyImages';
 import connectDB from '@/config/database';
 import { FaArrowLeftLong } from 'react-icons/fa6';
-import Link from 'next/link';
-import PropertyDetails from '@/components/PropertyDetails'
 
 type Params = {
 	id: string;
@@ -39,6 +40,7 @@ export default async function PropertyPage({ params }: { params: Params }) {
 					</div>
 				</div>
 			</div>
+			<PropertyImages images={property.images} />
 		</section>
 	);
 }
