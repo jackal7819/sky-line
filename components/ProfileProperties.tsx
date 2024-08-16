@@ -1,5 +1,6 @@
 'use client';
 
+import deleteProperty from '@/app/actions/deleteProperty';
 import { IProperty } from '@/models/Property';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,6 +14,22 @@ export default function ProfileProperties({
 	properties: initialProperties,
 }: ProfilePropertiesProps) {
 	const [properties, setProperties] = useState(initialProperties);
+
+	const handleDelete = async (propertyId: string) => {
+		const confirmed = window.confirm('Are you sure you want to delete?');
+
+		if (!confirmed) {
+			return;
+		}
+
+		await deleteProperty(propertyId);
+
+		const newProperties = properties.filter(
+			(property) => String(property._id) !== propertyId
+		);
+
+		setProperties(newProperties);
+	};
 
 	return (
 		<>
@@ -44,6 +61,7 @@ export default function ProfileProperties({
 						<button
 							className='px-6 py-2 text-white duration-500 border-4 rounded-md bg-rose-500 hover:bg-white border-rose-500 hover:text-rose-500'
 							type='button'
+							onClick={() => handleDelete(String(property._id))}
 						>
 							Delete
 						</button>
