@@ -1,9 +1,10 @@
 'use client';
 
-import deleteProperty from '@/app/actions/deleteProperty';
-import { IProperty } from '@/models/Property';
 import Image from 'next/image';
 import Link from 'next/link';
+import deleteProperty from '@/app/actions/deleteProperty';
+import { IProperty } from '@/models/Property';
+import { toast } from 'react-toastify';
 import { useState } from 'react';
 
 interface ProfilePropertiesProps {
@@ -29,6 +30,8 @@ export default function ProfileProperties({
 		);
 
 		setProperties(newProperties);
+
+		toast.success('Property Deleted Successfully');
 	};
 
 	return (
