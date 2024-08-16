@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import Property from '@/models/Property';
+import Property, { IProperty } from '@/models/Property';
 import PropertyDetails from '@/components/PropertyDetails';
 import PropertyHeader from '@/components/PropertyHeader';
 import PropertyImages from '@/components/PropertyImages';
 import connectDB from '@/config/database';
 import { FaArrowLeftLong } from 'react-icons/fa6';
+import convertToObject from '@/utils/convertToObject';
 
 type Params = {
 	id: string;
@@ -12,13 +13,19 @@ type Params = {
 
 export default async function PropertyPage({ params }: { params: Params }) {
 	await connectDB();
-	const property = await Property.findById(params.id).lean();
+	const propertyDoc = await Property.findById(params.id).lean();
 
-	if (!property) {
-		return {
-			notFound: true,
-		};
+	if (!propertyDoc) {
+		return (
+			<section className='grid place-items-center'>
+				<h1 className='text-3xl font-bold text-center'>
+					Property Not Found
+				</h1>
+			</section>
+		);
 	}
+
+	const property = convertToObject(propertyDoc) as IProperty;
 
 	return (
 		<section>

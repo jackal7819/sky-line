@@ -1,6 +1,7 @@
 import ProfileProperties from '@/components/ProfileProperties';
 import connectDB from '@/config/database';
-import Property from '@/models/Property';
+import Property, { IProperty } from '@/models/Property';
+import convertToObject from '@/utils/convertToObject';
 import { getSessionUser } from '@/utils/getSessionUser';
 import Image from 'next/image';
 import { FaRegUser } from 'react-icons/fa';
@@ -15,7 +16,11 @@ export default async function ProfilePage() {
 	}
 
 	const { userId } = sessionUser;
-	const properties = await Property.find({ owner: userId }).lean();
+
+	const propertiesDocs = await Property.find({ owner: userId }).lean();
+	const properties: IProperty[] = propertiesDocs.map(
+		(doc) => convertToObject(doc) as IProperty
+	);
 
 	return (
 		<section className='bg-amber-50'>
