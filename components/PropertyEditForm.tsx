@@ -1,11 +1,15 @@
-import addProperty from '@/app/actions/addProperty';
+import { IProperty } from '@/models/Property';
 import { amenitiesList } from '@/utils/amenitiesList';
 
-export default function PropertyAddForm() {
+export default function PropertyEditForm({
+	property,
+}: {
+	property: IProperty;
+}) {
 	return (
-		<form action={addProperty}>
+		<form>
 			<h2 className='mb-6 text-3xl font-semibold text-center'>
-				Add Property
+				Edit Property
 			</h2>
 
 			<div className='mb-4'>
@@ -19,6 +23,7 @@ export default function PropertyAddForm() {
 					id='type'
 					name='type'
 					className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
+					defaultValue={property.type}
 					required
 				>
 					<option value='Apartment'>Apartment</option>
@@ -40,6 +45,7 @@ export default function PropertyAddForm() {
 					name='name'
 					className='w-full px-3 py-2 mb-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					placeholder='eg. Beautiful Apartment In Miami'
+					defaultValue={property.name}
 					required
 				/>
 			</div>
@@ -56,6 +62,7 @@ export default function PropertyAddForm() {
 					className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					rows={4}
 					placeholder='Add an optional description of your property'
+					defaultValue={property.description}
 				></textarea>
 			</div>
 
@@ -69,6 +76,7 @@ export default function PropertyAddForm() {
 					name='location.street'
 					className='w-full px-3 py-2 mb-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					placeholder='Street'
+					defaultValue={property.location.street}
 				/>
 				<input
 					type='text'
@@ -76,6 +84,7 @@ export default function PropertyAddForm() {
 					name='location.city'
 					className='w-full px-3 py-2 mb-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					placeholder='City'
+					defaultValue={property.location.city}
 					required
 				/>
 				<input
@@ -84,6 +93,7 @@ export default function PropertyAddForm() {
 					name='location.state'
 					className='w-full px-3 py-2 mb-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					placeholder='State'
+					defaultValue={property.location.state}
 					required
 				/>
 				<input
@@ -92,6 +102,7 @@ export default function PropertyAddForm() {
 					name='location.zipcode'
 					className='w-full px-3 py-2 mb-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					placeholder='Zipcode'
+					defaultValue={property.location.zipcode}
 				/>
 			</div>
 
@@ -108,6 +119,7 @@ export default function PropertyAddForm() {
 						id='beds'
 						name='beds'
 						className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
+						defaultValue={property.beds}
 						required
 					/>
 				</div>
@@ -123,6 +135,7 @@ export default function PropertyAddForm() {
 						id='baths'
 						name='baths'
 						className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
+						defaultValue={property.baths}
 						required
 					/>
 				</div>
@@ -138,6 +151,7 @@ export default function PropertyAddForm() {
 						id='square_feet'
 						name='square_feet'
 						className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
+						defaultValue={property.square_feet}
 						required
 					/>
 				</div>
@@ -156,6 +170,9 @@ export default function PropertyAddForm() {
 								name='amenities'
 								value={amenity.value}
 								className='mr-2'
+								defaultChecked={property.amenities.includes(
+									amenity.value
+								)}
 							/>
 							<label htmlFor={amenity.id}>{amenity.label}</label>
 						</div>
@@ -177,6 +194,7 @@ export default function PropertyAddForm() {
 							id='weekly_rate'
 							name='rates.weekly'
 							className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
+							defaultValue={property.rates.weekly}
 						/>
 					</div>
 					<div className='flex items-center'>
@@ -188,6 +206,7 @@ export default function PropertyAddForm() {
 							id='monthly_rate'
 							name='rates.monthly'
 							className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
+							defaultValue={property.rates.monthly}
 						/>
 					</div>
 					<div className='flex items-center'>
@@ -199,6 +218,7 @@ export default function PropertyAddForm() {
 							id='nightly_rate'
 							name='rates.nightly'
 							className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
+							defaultValue={property.rates.nightly}
 						/>
 					</div>
 				</div>
@@ -217,6 +237,7 @@ export default function PropertyAddForm() {
 					name='seller_info.name'
 					className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					placeholder='Name'
+					defaultValue={property.seller_info.name}
 				/>
 			</div>
 			<div className='mb-4'>
@@ -232,6 +253,7 @@ export default function PropertyAddForm() {
 					name='seller_info.email'
 					className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					placeholder='Email address'
+					defaultValue={property.seller_info.email}
 					required
 				/>
 			</div>
@@ -248,23 +270,7 @@ export default function PropertyAddForm() {
 					name='seller_info.phone'
 					className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
 					placeholder='Phone'
-				/>
-			</div>
-
-			<div className='mb-4'>
-				<label
-					htmlFor='images'
-					className='block mb-2 font-bold text-gray-700'
-				>
-					Images (Select up to 4 images)
-				</label>
-				<input
-					type='file'
-					id='images'
-					name='images'
-					className='w-full px-3 py-2 text-black bg-white border rounded focus:outline-none focus:ring focus:ring-black'
-					accept='image/*'
-					multiple
+					defaultValue={property.seller_info.phone}
 				/>
 			</div>
 
@@ -273,7 +279,7 @@ export default function PropertyAddForm() {
 					className='w-full px-4 py-2 font-bold text-white duration-500 bg-black rounded hover:bg-amber-500 focus:outline-none focus:shadow-outline'
 					type='submit'
 				>
-					Add Property
+					Update Property
 				</button>
 			</div>
 		</form>

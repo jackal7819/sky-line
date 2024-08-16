@@ -56,7 +56,7 @@ export default function ProfileProperties({
 					</div>
 					<div className='flex gap-4 mt-4'>
 						<Link
-							href='/add-property'
+							href={`/properties/${property._id}/edit`}
 							className='px-6 py-2 text-white duration-500 border-4 rounded-md bg-amber-500 hover:bg-white border-amber-500 hover:text-amber-500'
 						>
 							Edit
