@@ -1,41 +1,21 @@
 'use server';
 
 import Property from '@/models/Property';
-import cloudinary from '@/config/cloudinary';
 import connectDB from '@/config/database';
 import { getSessionUser } from '@/utils/getSessionUser';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
-export interface PropertyData {
-	owner: string | null;
-	type: string | null;
-	name: string | null;
-	description: string | null;
-	location: {
-		street: string | null;
-		city: string | null;
-		state: string | null;
-		zipcode: string | null;
-	};
-	beds: number | null;
-	baths: number | null;
-	square_feet: number | null;
-	amenities: string[] | null;
-	rates: {
-		nightly: number | null;
-		weekly: number | null;
-		monthly: number | null;
-	};
-	seller_info: {
-		name: string | null;
-		email: string | null;
-		phone: string | null;
-	};
-	images: string[] | null;
+import { PropertyData } from './addProperty';
+
+interface UpdatePropertyProps {
+	propertyId: string;
 }
 
-export default async function addProperty(formData: FormData) {
+export default async function updateProperty(
+	{ propertyId }: UpdatePropertyProps,
+	formData: FormData
+) {
 	await connectDB();
 
 	const sessionUser = await getSessionUser();
@@ -46,11 +26,12 @@ export default async function addProperty(formData: FormData) {
 
 	const { userId } = sessionUser;
 
-	// Access all values from amenities and images
-	const amenities = formData.getAll('amenities') as string[];
-	const images = formData
-		.getAll('images')
-		.filter((image) => image instanceof File && image.name !== '') as File[];
+	const existingProperty = await Property.findById(propertyId);
+
+	// Verify that the user is the owner of the property
+	if (String(existingProperty?.owner) !== userId) {
+		throw new Error('Current user is not the owner of the property');
+	}
 
 	const propertyData: PropertyData = {
 		owner: userId,
@@ -68,7 +49,7 @@ export default async function addProperty(formData: FormData) {
 		square_feet: formData.get('square_feet')
 			? Number(formData.get('square_feet'))
 			: null,
-		amenities,
+		amenities: formData.getAll('amenities') as string[] | null,
 		rates: {
 			nightly: formData.get('rates.nightly')
 				? Number(formData.get('rates.nightly'))
@@ -85,34 +66,14 @@ export default async function addProperty(formData: FormData) {
 			email: formData.get('seller_info.email') as string | null,
 			phone: formData.get('seller_info.phone') as string | null,
 		},
-		images: [],
+		images: existingProperty?.images || null,
 	};
 
-	const imageUrls = [];
-
-	for (const imageFile of images) {
-		const imageBuffer = await imageFile.arrayBuffer();
-		const imageArray = Array.from(new Uint8Array(imageBuffer));
-		const imageData = Buffer.from(imageArray);
-
-		// Convert to base64
-		const imageBase64 = imageData.toString('base64');
-
-		// Make request to Cloudinary API
-		const result = await cloudinary.uploader.upload(
-			`data:image/png;base64,${imageBase64}`,
-			{ folder: 'skyline' }
-		);
-
-		imageUrls.push(result.secure_url);
-	}
-
-	propertyData.images = imageUrls;
-
-	const newProperty = new Property(propertyData);
-	await newProperty.save();
+	const updatedProperty = await Property.findByIdAndUpdate(
+		propertyId,
+		propertyData
+	);
 
 	revalidatePath('/', 'layout');
-
-	redirect(`/properties/${newProperty._id}`);
+	redirect(`/properties/${updatedProperty?._id}`);
 }

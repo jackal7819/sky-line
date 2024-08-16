@@ -1,13 +1,14 @@
+import updateProperty from '@/app/actions/updateProperty'
 import { IProperty } from '@/models/Property';
 import { amenitiesList } from '@/utils/amenitiesList';
 
-export default function PropertyEditForm({
-	property,
-}: {
-	property: IProperty;
-}) {
+export default function PropertyEditForm({ property }: { property: IProperty }) {
+  const updatePropertyById = updateProperty.bind(null, { 
+    propertyId: property._id.toString() 
+  });
+	
 	return (
-		<form>
+		<form action={updatePropertyById}>
 			<h2 className='mb-6 text-3xl font-semibold text-center'>
 				Edit Property
 			</h2>
