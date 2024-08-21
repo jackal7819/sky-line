@@ -7,6 +7,7 @@ import {
 	FaTimes,
 } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
+import PropertyMap from './PropertyMap';
 
 type PropertyPageProps = {
 	property: IProperty;
@@ -107,7 +108,9 @@ export default function PropertyDetails({ property }: PropertyPageProps) {
 				</ul>
 			</div>
 			<div className='p-6 mt-6 bg-white rounded-lg shadow-md'>
-				<div id='map'></div>
+				<div id='map'>
+					<PropertyMap property={property} />
+				</div>
 			</div>
 		</main>
 	);
