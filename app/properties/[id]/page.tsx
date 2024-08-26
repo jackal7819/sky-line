@@ -1,11 +1,14 @@
+import BookmarkButton from '@/components/BookmarkButton';
 import Link from 'next/link';
-import Property, { IProperty } from '@/models/Property';
+import PropertyContactForm from '@/components/PropertyContactForm'
 import PropertyDetails from '@/components/PropertyDetails';
 import PropertyHeader from '@/components/PropertyHeader';
 import PropertyImages from '@/components/PropertyImages';
+import ShareButtons from '@/components/ShareButtons';
 import connectDB from '@/config/database';
-import { FaArrowLeftLong } from 'react-icons/fa6';
 import convertToObject from '@/utils/convertToObject';
+import Property, { IProperty } from '@/models/Property';
+import { FaArrowLeftLong } from 'react-icons/fa6';
 
 type Params = {
 	id: string;
@@ -44,6 +47,11 @@ export default async function PropertyPage({ params }: { params: Params }) {
 					<div className='grid w-full grid-cols-1 gap-6 md:grid-cols-70/30'>
 						{/* PROPERTY INFO */}
 						<PropertyDetails property={property} />
+						<aside className='space-y-4'>
+							<BookmarkButton property={property} />
+							<ShareButtons property={property} />
+							<PropertyContactForm property={property} />
+						</aside>
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,3 @@
-import { IProperty } from '@/models/Property';
 import {
 	FaBath,
 	FaBed,
@@ -7,6 +6,8 @@ import {
 	FaTimes,
 } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
+import { IProperty } from '@/models/Property';
+
 import PropertyMap from './PropertyMap';
 
 type PropertyPageProps = {
@@ -27,7 +28,7 @@ export default function PropertyDetails({ property }: PropertyPageProps) {
 					</p>
 				</div>
 
-				<h3 className='p-2 my-6 text-lg font-bold text-white bg-gray-800'>
+				<h3 className='p-2 my-6 text-lg font-bold text-white bg-gray-800 rounded-md'>
 					Rates & Options
 				</h3>
 				<div className='flex flex-col justify-around md:flex-row'>
@@ -39,7 +40,7 @@ export default function PropertyDetails({ property }: PropertyPageProps) {
 							{property.rates.nightly ? (
 								`$${property.rates.nightly.toLocaleString()}`
 							) : (
-								<FaTimes className='text-rose-700 ' />
+								<FaTimes className='text-rose-500 ' />
 							)}
 						</div>
 					</div>
@@ -51,7 +52,7 @@ export default function PropertyDetails({ property }: PropertyPageProps) {
 							{property.rates.weekly ? (
 								`$${property.rates.weekly.toLocaleString()}`
 							) : (
-								<FaTimes className='text-rose-700 ' />
+								<FaTimes className='text-rose-500 ' />
 							)}
 						</div>
 					</div>
@@ -63,7 +64,7 @@ export default function PropertyDetails({ property }: PropertyPageProps) {
 							{property.rates.monthly ? (
 								`$${property.rates.monthly.toLocaleString()}`
 							) : (
-								<FaTimes className='text-rose-700 ' />
+								<FaTimes className='text-rose-500 ' />
 							)}
 						</div>
 					</div>

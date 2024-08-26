@@ -270,7 +270,7 @@ export default function PropertyAddForm() {
 
 			<div>
 				<button
-					className='w-full px-4 py-2 font-bold text-white duration-500 bg-black rounded hover:bg-amber-500 focus:outline-none focus:shadow-outline'
+					className='w-full px-4 py-2 font-bold text-white duration-500 bg-black rounded-md hover:bg-amber-500 focus:outline-none focus:shadow-outline'
 					type='submit'
 				>
 					Add Property
