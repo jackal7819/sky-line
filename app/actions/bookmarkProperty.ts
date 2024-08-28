@@ -2,7 +2,7 @@
 
 import User from '@/models/User';
 import connectDB from '@/config/database';
-import { Schema, Types } from 'mongoose';
+import { Types } from 'mongoose';
 import { getSessionUser } from '@/utils/getSessionUser';
 import { revalidatePath } from 'next/cache';
 
@@ -30,10 +30,13 @@ export default async function bookmarkProperty(
 		throw new Error('User not found');
 	}
 
-	const propertyObjectId = new Schema.Types.ObjectId(propertyId);
+	const propertyObjectId =
+		typeof propertyId === 'string'
+			? new Types.ObjectId(propertyId)
+			: propertyId;
 
 	// Type assertion to ensure TypeScript recognizes it as a Mongoose array
-	const bookmarks = user.bookmarks as Types.Array<Schema.Types.ObjectId>;
+	const bookmarks = user.bookmarks as unknown as Types.Array<Types.ObjectId>;
 
 	let isBookmarked = bookmarks.includes(propertyObjectId);
 
