@@ -13,8 +13,8 @@ export default async function HomeProperties() {
 
 	return (
 		<>
-			<section className='px-4 py-6'>
-				<div className='m-auto'>
+			<section className='py-6'>
+				<div className='px-2 mx-auto max-w-screen-2xl sm:px-6 lg:px-8'>
 					<h2 className='mb-6 text-3xl font-bold text-center text-amber-500'>
 						Recent Properties
 					</h2>
