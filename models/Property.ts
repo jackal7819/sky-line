@@ -1,8 +1,8 @@
-import { Document, Model, Schema, model, models } from 'mongoose';
+import { Document, Model, Schema, Types, model, models } from 'mongoose';
 
 export type IProperty = Document & {
-	_id: Schema.Types.ObjectId;
-	owner: Schema.Types.ObjectId;
+	_id: Types.ObjectId;
+	owner: Types.ObjectId;
 	name: string;
 	type: string;
 	description?: string;

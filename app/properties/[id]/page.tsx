@@ -1,6 +1,6 @@
 import BookmarkButton from '@/components/BookmarkButton';
 import Link from 'next/link';
-import PropertyContactForm from '@/components/PropertyContactForm'
+import PropertyContactForm from '@/components/PropertyContactForm';
 import PropertyDetails from '@/components/PropertyDetails';
 import PropertyHeader from '@/components/PropertyHeader';
 import PropertyImages from '@/components/PropertyImages';
@@ -16,6 +16,7 @@ type Params = {
 
 export default async function PropertyPage({ params }: { params: Params }) {
 	await connectDB();
+
 	const propertyDoc = await Property.findById(params.id).lean();
 
 	if (!propertyDoc) {
