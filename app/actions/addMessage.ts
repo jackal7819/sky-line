@@ -4,7 +4,15 @@ import Message from '@/models/Message';
 import connectDB from '@/config/database';
 import { getSessionUser } from '@/utils/getSessionUser';
 
-export default async function addMessage(formData: FormData) {
+export interface AddMessageResult {
+	submitted?: boolean;
+	error?: string;
+}
+
+export default async function addMessage(
+	prevState: AddMessageResult,
+	formData: FormData
+) {
 	await connectDB();
 
 	const sessionUser = await getSessionUser();
@@ -23,12 +31,12 @@ export default async function addMessage(formData: FormData) {
 
 	const newMessage = new Message({
 		sender: userId,
-		recipient,
-		property: formData.get('property'),
-		name: formData.get('name'),
-		email: formData.get('email'),
-		phone: formData.get('phone'),
-		body: formData.get('body'),
+		recipient: recipient as string | null,
+		property: formData.get('property') as string | null,
+		name: formData.get('name') as string | null,
+		email: formData.get('email') as string | null,
+		phone: formData.get('phone') as string | null,
+		body: formData.get('body') as string | null,
 	});
 
 	await newMessage.save();

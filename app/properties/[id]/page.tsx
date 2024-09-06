@@ -37,7 +37,7 @@ export default async function PropertyPage({ params }: { params: Params }) {
 			<div className='px-2 py-6 mx-auto sm:px-6 lg:px-8 max-w-screen-2xl'>
 				<Link
 					href='/properties'
-					className='flex items-center gap-2 duration-500 text-amber-500 hover:text-black'
+					className='flex items-center w-48 gap-2 duration-500 text-amber-500 hover:text-black'
 				>
 					<FaArrowLeftLong size={24} />
 					Back to Properties
