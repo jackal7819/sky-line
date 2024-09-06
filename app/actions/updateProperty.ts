@@ -6,8 +6,6 @@ import { getSessionUser } from '@/utils/getSessionUser';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
-import { PropertyData } from './addProperty';
-
 interface UpdatePropertyProps {
 	propertyId: string;
 }
@@ -33,7 +31,7 @@ export default async function updateProperty(
 		throw new Error('Current user is not the owner of the property');
 	}
 
-	const propertyData: PropertyData = {
+	const propertyData = new Property({
 		owner: userId,
 		type: formData.get('type') as string | null,
 		name: formData.get('name') as string | null,
@@ -67,7 +65,7 @@ export default async function updateProperty(
 			phone: formData.get('seller_info.phone') as string | null,
 		},
 		images: existingProperty?.images || null,
-	};
+	});
 
 	const updatedProperty = await Property.findByIdAndUpdate(
 		propertyId,

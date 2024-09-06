@@ -7,34 +7,6 @@ import { getSessionUser } from '@/utils/getSessionUser';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
-export interface PropertyData {
-	owner: string | null;
-	type: string | null;
-	name: string | null;
-	description: string | null;
-	location: {
-		street: string | null;
-		city: string | null;
-		state: string | null;
-		zipcode: string | null;
-	};
-	beds: number | null;
-	baths: number | null;
-	square_feet: number | null;
-	amenities: string[] | null;
-	rates: {
-		nightly: number | null;
-		weekly: number | null;
-		monthly: number | null;
-	};
-	seller_info: {
-		name: string | null;
-		email: string | null;
-		phone: string | null;
-	};
-	images: string[] | null;
-}
-
 export default async function addProperty(formData: FormData) {
 	await connectDB();
 
@@ -50,9 +22,11 @@ export default async function addProperty(formData: FormData) {
 	const amenities = formData.getAll('amenities') as string[];
 	const images = formData
 		.getAll('images')
-		.filter((image) => image instanceof File && image.name !== '') as File[];
+		.filter(
+			(image) => image instanceof File && image.name !== ''
+		) as File[];
 
-	const propertyData: PropertyData = {
+	const propertyData = new Property({
 		owner: userId,
 		type: formData.get('type') as string | null,
 		name: formData.get('name') as string | null,
@@ -86,7 +60,7 @@ export default async function addProperty(formData: FormData) {
 			phone: formData.get('seller_info.phone') as string | null,
 		},
 		images: [],
-	};
+	});
 
 	const imageUrls = [];
 
