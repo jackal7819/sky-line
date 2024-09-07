@@ -1,4 +1,4 @@
-import { Document, Model, Schema, Types, model, models } from 'mongoose';
+import { Document, Model, Schema, model, models } from 'mongoose';
 
 export type IProperty = Document & {
 	_id: Schema.Types.ObjectId;

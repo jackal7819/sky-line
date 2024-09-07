@@ -1,10 +1,10 @@
+import Link from 'next/link';
+import PropertyCard from '@/components/PropertyCard';
 import PropertySearchForm from '@/components/PropertySearchForm';
 import connectDB from '@/config/database';
 import convertToObject from '@/utils/convertToObject';
 import Property, { IProperty } from '@/models/Property';
-import Link from 'next/link';
 import { FaArrowAltCircleLeft } from 'react-icons/fa';
-import PropertyCard from '@/components/PropertyCard';
 
 interface SearchParams {
 	searchParams: {

@@ -1,15 +1,28 @@
 import { Document, Model, Schema, model, models } from 'mongoose';
 
-export type IMessage = Document & {
-	sender: Schema.Types.ObjectId;
+interface ISender {
+	_id: Schema.Types.ObjectId;
+	username: string;
+}
+
+interface IProperty {
+	_id: Schema.Types.ObjectId;
+	username: string;
+}
+
+export interface IMessage extends Document {
+	_id: Schema.Types.ObjectId;
+	sender: ISender;
 	recipient: Schema.Types.ObjectId;
-	property: Schema.Types.ObjectId;
+	property: IProperty;
 	name: string;
 	email: string;
-	phone: string;
+	phone?: string;
 	body: string;
 	read: boolean;
-};
+	createdAt: Date;
+	updatedAt: Date;
+}
 
 const MessageSchema = new Schema<IMessage>(
 	{
