@@ -50,7 +50,7 @@ export default async function MessagesPage() {
 						</h2>
 					)}
 					{messages.length > 0 && (
-						<div className='grid grid-cols-1 gap-6 md:grid-cols-3'>
+						<div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
 							{messages.map((message) => (
 								<MessageCard
 									key={String(message._id)}

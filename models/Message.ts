@@ -7,7 +7,7 @@ interface ISender {
 
 interface IProperty {
 	_id: Schema.Types.ObjectId;
-	username: string;
+	name: string;
 }
 
 export interface IMessage extends Document {
