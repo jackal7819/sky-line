@@ -1,8 +1,24 @@
+'use client';
+
+import markMessageAsRead from '@/app/actions/markMessageAsRead';
 import { IMessage } from '@/models/Message';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 export default function MessageCard({ message }: { message: IMessage }) {
+	const [isRead, setIsRead] = useState(message.read);
+
+	const handleReadClick = async () => {
+		const read = await markMessageAsRead(String(message._id));
+		setIsRead(read);
+		toast.success(`Marked  as ${read ? 'read' : 'new'}`);
+	};
+
 	return (
 		<div className='relative flex flex-col gap-2 p-4 bg-white border border-gray-200 rounded-md shadow-md '>
+			{!isRead && (
+				<div className='absolute px-2 py-1 text-white bg-gray-500 rounded-md right-2 top-2'>New</div>
+			)}
 			<h2 className='mb-4 text-xl'>
 				<span className='font-bold'>Property Inquiry: </span>
 				{message.property.name}
@@ -30,8 +46,11 @@ export default function MessageCard({ message }: { message: IMessage }) {
 				</li>
 			</ul>
 			<div className='flex gap-5'>
-				<button className='px-3 py-1 text-white duration-500 border-4 rounded-md bg-amber-500 border-amber-500 hover:bg-white hover:text-amber-500'>
-					Mark As Read
+				<button
+					onClick={handleReadClick}
+					className='px-3 py-1 text-white duration-500 border-4 rounded-md bg-amber-500 border-amber-500 hover:bg-white hover:text-amber-500'
+				>
+					{isRead ? 'Mark As New' : 'Mark As Read'}
 				</button>
 				<button className='px-3 py-1 text-white duration-500 border-4 rounded-md bg-rose-500 border-rose-500 hover:bg-white hover:text-rose-500'>
 					Delete

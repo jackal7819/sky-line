@@ -2,17 +2,10 @@
 
 import Message from '@/models/Message';
 import connectDB from '@/config/database';
-// import { Types } from 'mongoose';
 import { getSessionUser } from '@/utils/getSessionUser';
 import { revalidatePath } from 'next/cache';
 
-// interface MarkStatus {
-// 	read: boolean;
-// }
-
-export default async function markMessageAsRead(
-	messageId: string
-) {
+export default async function markMessageAsRead(messageId: string) {
 	await connectDB();
 
 	const sessionUser = await getSessionUser();
@@ -41,22 +34,4 @@ export default async function markMessageAsRead(
 	await message.save();
 
 	return message.read;
-
-	// const user = await User.findById(userId);
-
-	// if (!user) {
-	// 	throw new Error('User not found');
-	// }
-
-	// const propertyObjectId =
-	// 	typeof propertyId === 'string'
-	// 		? new Types.ObjectId(propertyId)
-	// 		: propertyId;
-
-	// Type assertion to ensure TypeScript recognizes it as a Mongoose array
-	// const bookmarks = user.bookmarks as unknown as Types.Array<Types.ObjectId>;
-
-	// const isBookmarked = bookmarks.includes(propertyObjectId);
-
-	// return { isBookmarked };
 }
