@@ -22,5 +22,11 @@ export function GlobalProvider({ children }: { children: ReactNode }) {
 }
 
 export function useGlobalContext() {
-	return useContext(GlobalContext);
+	const context = useContext(GlobalContext);
+	if (context === undefined) {
+		throw new Error(
+			'useGlobalContext must be used within a GlobalProvider'
+		);
+	}
+	return context;
 }

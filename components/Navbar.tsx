@@ -1,20 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { FaBars, FaGoogle, FaRegBell, FaRegUser } from 'react-icons/fa';
+import { BuiltInProviderType } from 'next-auth/providers/index';
 import {
 	ClientSafeProvider,
-	getProviders,
 	LiteralUnion,
+	getProviders,
 	signIn,
 	signOut,
 	useSession,
 } from 'next-auth/react';
+import { FaBars, FaGoogle, FaRegBell, FaRegUser } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import Logo from './Logo';
-import { BuiltInProviderType } from 'next-auth/providers/index';
+import UnreadMessageCount from './UnreadMessageCount'
 
 export default function Navbar() {
 	const { data: session } = useSession();
@@ -110,9 +111,7 @@ export default function Navbar() {
 								<div className='duration-500 cursor-pointer hover:text-white'>
 									<FaRegBell size={32} />
 								</div>
-								<span className='absolute top-0 right-0 inline-flex items-center justify-center text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full size-5'>
-									2
-								</span>
+								<UnreadMessageCount />
 							</Link>
 							{/* PROFILE DROPDOWN BUTTON */}
 							<div className='relative ml-3 2xl:ml-6'>
