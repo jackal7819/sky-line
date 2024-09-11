@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaBath, FaBed, FaMoneyBill, FaRulerCombined } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
-import { ObjectId } from 'mongoose'
+import { ObjectId } from 'mongoose';
 
 type RatePeriod = 'monthly' | 'weekly' | 'nightly';
 
@@ -61,14 +61,16 @@ export default function PropertyCard({
 	};
 	return (
 		<div className='relative shadow-md rounded-xl'>
-			<Image
-				src={images[0]}
-				width={0}
-				height={0}
-				sizes='100vw'
-				alt={name}
-				className='w-full h-auto rounded-t-xl'
-			/>
+			<Link href={`/properties/${_id}`}>
+				<Image
+					src={images[0]}
+					width={0}
+					height={0}
+					sizes='100vw'
+					alt={name}
+					className='w-full h-auto rounded-t-xl'
+				/>
+			</Link>
 			<div className='p-4'>
 				<div className='mb-6 text-left md:text-center lg:text-left'>
 					<div className='text-gray-600'>{type}</div>
