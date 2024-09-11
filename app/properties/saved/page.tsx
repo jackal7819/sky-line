@@ -40,7 +40,7 @@ export default async function SavedPropertyPage() {
 						{bookmarkedProperties.map((property) => (
 							<PropertyCard
 								key={String(property._id)}
-								{...property}
+								property={property}
 							/>
 						))}
 					</div>

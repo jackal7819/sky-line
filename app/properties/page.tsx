@@ -36,7 +36,7 @@ export default async function PropertiesPage({
 						{properties.map((property) => (
 							<PropertyCard
 								key={String(property._id)}
-								{...property}
+								property={property}
 							/>
 						))}
 					</div>

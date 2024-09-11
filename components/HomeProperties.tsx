@@ -28,7 +28,7 @@ export default async function HomeProperties() {
 							{recentProperties.map((property) => (
 								<PropertyCard
 									key={String(property._id)}
-									{...property}
+									property={property}
 								/>
 							))}
 						</div>
