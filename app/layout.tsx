@@ -1,5 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
-
+import 'photoswipe/dist/photoswipe.css';
 import './globals.css';
 
 import AuthProvider from '@/components/AuthProvider';
