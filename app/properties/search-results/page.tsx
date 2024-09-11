@@ -70,7 +70,7 @@ export default async function SearchResultsPage({
 							{properties.map((property: IProperty) => (
 								<PropertyCard
 									key={String(property._id)}
-									{...property}
+									property={property}
 								/>
 							))}
 						</div>
